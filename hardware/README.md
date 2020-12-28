@@ -4,7 +4,7 @@
 
 From the header of the [firmware updating tool](https://www.yaesu.com/downloadFile.cfm?FileID=16503&FileCatID=42&FileName=FT%2D991A%5FFirmware%5Fupdate%5F202006.zip&FileContentType=application%2Fx%2Dzip%2Dcompressed)
 it looks like a R5F61653RN50FPV CPU from Renesas.
-Unfortunatly as the time of this writing the datasheet is not found on the Renesas webpage, [alternative location](https://pdf1.alldatasheet.com/datasheet-pdf/view/249700/RENESAS/R5F61653RN50FPV.html)
+Unfortunatly as of the time writing the datasheet is not found on the Renesas webpage [alternative location](https://pdf1.alldatasheet.com/datasheet-pdf/view/249700/RENESAS/R5F61653RN50FPV.html)
 
 ```
 ; ******************************************
