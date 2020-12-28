@@ -17,3 +17,10 @@ This aims to provide a source for documentation and tools for using the Yaesu FT
 Code in here is licensed under [GPLv2](./LICENSE.GPL).
 Documentation is under [Creative Commons v3](https://creativecommons.org/licenses/by/3.0/) license.
 
+## Disclaimer
+
+This is all found by reading and/or experimenting with the device.
+
+I am not responsible for damage to your hardware, loss data and damage done to others.
+Think twice and please be careful and sensible before tinkering.
+
