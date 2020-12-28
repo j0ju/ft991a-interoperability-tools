@@ -18,7 +18,27 @@ Unfortunatly as of the time writing the datasheet is not found on the Renesas we
 ; ******************************************
 ```
 
+The MCU datasheet tells us the the MCU has 4 operating modes. (starting from page 27)
+ * normal mode (max 64kb overall)
+ * middle mode (64kb program area, 16MB data area)
+ * advanced mode (16MB program aread, 4GB data)
+ * maximum mode (program area, data area 4GB)
+
+Q: which is is used in the FT991a?
+Guess: Advanced mode, as
+ * the firmware header looks like 24bit addressing and
+ * the `SPRabc;` CAT command seems to expect 24bit in abc.
+
+Q: How about segmentation?
+Guess: flat
+
+Starting on page 33 the startup of the MCU is described.
+
 ## Memory layout
 
-tbd
+... to be done ...
+
+Guess: Flash memory located at 0x000000, at least 6MB large. And we need an entrypoint vector in 0x000000, according to the boot up.
+
+Q: Where is some RAM located?
 
