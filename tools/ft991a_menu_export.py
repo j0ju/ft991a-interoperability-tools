@@ -6,7 +6,9 @@ ser = serial.Serial('/dev/ttyUSB0', 38400)
 
 for k in range(1,154):
   cmd = b'EX%03i;' % (k)
-  #print cmd;
+
+  if k in (31, 87):
+    continue
 
   ser.write(cmd)
   rs = b''
