@@ -17,9 +17,10 @@ python ft991a_menu_export.py > dump.ft991a
 
 This [file](DO1JJB.defaults.ft991a) contains a dump of DO1JJBs config, stripped by some creds.
 
-## `ft991a_menu_import.py`
+## `ft991a_cat_replay.py`
 
-This executes all CAT commands prefixed with EX, so this can be used to restore the settings from `ft991a_menu_export.py`.
+This executes all CAT commands, read from STDIN.
+this can be used to restore the settings from `ft991a_menu_export.py`, as this uses EX command.
 
 Hint: This can be used to set also only parts of the TRX config, for changing from CW to telephony to DigiModes and vice versa.
 Just put the changed EX commands in a file and feed it with this tool to the TRX.
@@ -27,7 +28,7 @@ Just put the changed EX commands in a file and feed it with this tool to the TRX
 ### Example
 
 ```
-python ft991a_menu_import < dump.ft991a
+python ft991a_cat_replay.py < dump.ft991a
 ```
 
 ### Limitations

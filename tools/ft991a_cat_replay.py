@@ -16,12 +16,10 @@ ser = serial.Serial('/dev/ttyUSB0', SPEED, timeout = float(WAIT)/float(SPEED) )
 for line in STDIN:
   cmd = bytearray(line.strip())
 
+  # empty lines and comments
+  if cmd == '':
+      continue
   if cmd[0:1] == '#':
-    # comment
-    continue
-
-  if cmd[0:2] != 'EX':
-    print 'E: "%s" is not a menu settings command, ignoring' % ( cmd )
     continue
 
   ser.write(cmd + b';')
