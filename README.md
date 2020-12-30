@@ -10,6 +10,7 @@ This aims to provide a source for documentation and tools for using the Yaesu FT
  * [Wires-X manual](https://www.yaesu.com/downloadFile.cfm?FileID=13425&FileCatID=158&FileName=FT%2D991A%5FWIRES%2DX%5FENG%5F1712%2DC.pdf&FileContentType=application%2Fpdf)
  * [GM manual](https://www.yaesu.com/downloadFile.cfm?FileID=13279&FileCatID=158&FileName=FT%2D991A%5FGM%5FENG%5F1710%2DB.pdf&FileContentType=application%2Fpdf)
  * [CAT manual - FT-991A_CAT_OM_ENG_1711-D.pdf](https://www.yaesu.com/downloadFile.cfm?FileID=13370&FileCatID=158&FileName=FT%2D991A%5FCAT%5FOM%5FENG%5F1711%2DD.pdf&FileContentType=application%2Fpdf)
+ * [Yaesu FT-991A Amateur Radio Transceiver Articles Trove](https://github.com/rfrht/FT-991A/wiki)
  * [Feature request at Chirp](https://chirp.danplanet.com/issues/2531)
 
 ## Licenses
