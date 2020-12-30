@@ -1,0 +1,34 @@
+# from https://www.n1rwy.org/?p=157
+# Changes:
+#  * use serial hardware handshake
+#  * use CAT for TX instead of RTS
+# see also for FT8
+#  * http://www.g4ifb.com/FT8_Hinson_tips_for_HF_DXers.pdf
+EX0321
+EX0331
+EX0621
+EX064+1500
+EX065+1500
+EX06600
+EX06800
+EX0701
+EX0710
+EX0720
+
+# DATA-USB SSB
+MD0C
+
+# DT Gain 6, set this low and increase
+EX146006
+
+# set Meter to ALC, no ALC is good
+MS1
+
+# lowest power 5W
+PC005
+
+SH017
+
+# WSPR 10m
+FA028124600
+
