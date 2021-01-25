@@ -15,11 +15,15 @@ EX0701
 EX0710
 EX0720
 
-# DATA-USB SSB
+# set mode to DATA-USB SSB
 MD0C
 
+# set DATA USB ZF to wide
+NA00
+
 # DT Gain 6, set this low and increase
-EX146006
+#EX146006
+# above does not set DATA Gain, how to set this properly?
 
 # set Meter to ALC, no ALC is good
 MS1
@@ -27,8 +31,9 @@ MS1
 # lowest power 5W
 PC005
 
+# width 3000Hz for DATA-USB SSB/RTTY
 SH017
 
 # WSPR 10m
-FA028124600
+#FA028124600
 
