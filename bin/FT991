@@ -1,0 +1,76 @@
+#!/usr/bin/env python3
+
+# this should reflect 031
+SPEED = 38400
+# this should reflect setting no 032, not yet
+WAIT  = 1000
+# serial port for CAT, see ./contrib/rules.d99-ft991a.udev.rules
+PORT = "/dev/tty.991.0"
+
+import click
+
+def getCAT(ctx):
+  import serial
+
+  port = ctx.obj['port']
+  speed = ctx.obj['speed']
+
+  ser = serial.Serial(port = port, baudrate = speed, rtscts = True )
+  return ser
+
+@click.group()
+@click.option('--port', '-p', default=PORT, help='serial port for CAT commands (default %s)' % PORT)
+@click.option('--speed', '-p', default=SPEED, help='speed of serial port (default %s)' % SPEED)
+@click.pass_context
+def cli(ctx, port, speed):
+  ctx.ensure_object(dict)
+  ctx.obj['port'] = port
+  ctx.obj['speed'] = speed
+
+@cli.command()
+@click.pass_context
+def settime(ctx):
+  from datetime import datetime
+  from datetime import timezone
+  import time
+
+  now = datetime.now(timezone.utc)
+
+  datestr = now.strftime("%Y%m%d")
+  timestr = now.strftime("%H%M%S")
+
+  utc_offset = time.localtime().tm_gmtoff
+  utc_offset_h = int(time.localtime().tm_gmtoff / 3600)
+  utc_offset_m = int(time.localtime().tm_gmtoff % 3600)
+  if utc_offset < 0:
+    offsetstr = "-"
+    utc_offset_h = utc_offset_h * (-1)
+  else:
+    offsetstr = "+"
+  offsetstr = offsetstr + ( "%02i%02i" % (utc_offset_h, utc_offset_m) )
+  
+  ser = getCAT(ctx)
+  cmd = b'DT0%s;' % datestr.encode()
+  ser.write(cmd)
+
+  cmd = b'DT1%s;' % timestr.encode()
+  ser.write(cmd)
+
+  cmd = b'DT2%s;' % offsetstr.encode()
+  ser.write(cmd)
+
+@cli.command()
+@click.pass_context
+def configdump(ctx):
+  ser = getCAT(ctx)
+
+  for k in range(1,154):
+    cmd = b'EX%03i;' % (k)
+    ser.write(cmd)
+    rs = ser.read_until(expected=b';')
+    print(str(rs,'utf-8'))
+
+if __name__ == '__main__':
+  cli(obj={})
+
+# vim: ft=python sw=2 ts=2 et foldmethod=indent
