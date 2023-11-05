@@ -12,7 +12,7 @@ Here you can find the official docs for FT-991a CAT commands
  * MW
 
 Both CMDs can be used to read and write memory channels.
-The answer to th read command does not fit the description in the CAT Manual. It cannot be replayed without modification.
+The answer to the read command does not fit the description in the CAT Manual. It cannot be replayed without modification.
 
 ... tbd ...
 
