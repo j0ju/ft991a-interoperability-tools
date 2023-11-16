@@ -15,17 +15,21 @@ def getCAT(ctx):
   port = ctx.obj['port']
   speed = ctx.obj['speed']
 
-  ser = serial.Serial(port = port, baudrate = speed, rtscts = True )
+  ser = serial.Serial(port = port, baudrate = speed, rtscts = True, timeout = float(WAIT)/float(speed))
   return ser
+
 
 @click.group()
 @click.option('--port', '-p', default=PORT, help='serial port for CAT commands (default %s)' % PORT)
 @click.option('--speed', '-p', default=SPEED, help='speed of serial port (default %s)' % SPEED)
+#@click.option('--file', '-f', default="-", help='file to read CAT commands from or to write to. (default -, which means STDIN/STDOUT)')
 @click.pass_context
 def cli(ctx, port, speed):
   ctx.ensure_object(dict)
   ctx.obj['port'] = port
   ctx.obj['speed'] = speed
+  #ctx.obj['file'] = file
+
 
 @cli.command()
 @click.pass_context
@@ -59,6 +63,7 @@ def settime(ctx):
   cmd = b'DT2%s;' % offsetstr.encode()
   ser.write(cmd)
 
+
 @cli.command()
 @click.pass_context
 def configdump(ctx):
@@ -69,6 +74,46 @@ def configdump(ctx):
     ser.write(cmd)
     rs = ser.read_until(expected=b';')
     print(str(rs,'utf-8'))
+
+
+@cli.command()
+@click.pass_context
+def catreplay(ctx):
+
+  # Actions:
+  # * read from stdin or file (option)
+  # * read line by line
+  # * check if command in ignored list (will not be replayed)
+  #   * EX031 cannot be restored by CAT commands.
+  #   * EX087 cannot be changed.
+
+  from sys import stdin as STDIN;
+  ser = None
+  for line in STDIN:
+    cmd = line.strip()
+    
+    # skip empty lines and comments
+    if cmd == '':
+      continue
+    if cmd[0:1] == '#':
+      continue
+    if cmd[0:5] in [ "EX031", "EX087" ]:
+      continue
+
+    if not cmd[-1] == ";":
+      cmd = cmd + ";"
+
+    if ser == None:
+      ser = getCAT(ctx)
+
+    ser.write(cmd.encode())
+  
+    while ser.out_waiting > 0:
+      pass
+    
+    rs = ser.read_until(expected=b';')
+    if rs in [ b'?;']:
+      print ('E: error applying "%s", reply, "%s", ignoreing' % ( cmd, rs ))
 
 if __name__ == '__main__':
   cli(obj={})
