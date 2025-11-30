@@ -21,7 +21,7 @@ def getCAT(ctx):
 
 @click.group()
 @click.option('--port', '-p', default=PORT, help='serial port for CAT commands (default %s)' % PORT)
-@click.option('--speed', '-p', default=SPEED, help='speed of serial port (default %s)' % SPEED)
+@click.option('--speed', '-s', default=SPEED, help='speed of serial port (default %s)' % SPEED)
 #@click.option('--file', '-f', default="-", help='file to read CAT commands from or to write to. (default -, which means STDIN/STDOUT)')
 @click.pass_context
 def cli(ctx, port, speed):
