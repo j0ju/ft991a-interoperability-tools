@@ -1,10 +1,6 @@
-#
-# udev rule to symlink USB Serial from Yaesu FT991a to /dev/tty.ft991a and tty.ft991b
-#
-# place this in /etc/udev/rules.d
-#
-#
-# from udevadm info --attribute-walk /dev/ttyUSB0
+# udev rule to symlink USB Serial from Yaesu FT991a to /dev/tty.ft991-cat and tty.ft991-data
+
+# from udevadm info --attribute-walk /dev/ttyUSB0 # change the port it is actually for debugging
 #
 # E: ID_VENDOR_ID=10c4
 # E: ID_MODEL_ID=ea70
@@ -14,6 +10,9 @@
 # ATTRS{serial}=="DEADBEEF", 
 #
 
-SUBSYSTEM=="tty", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea70", ENV{ID_USB_INTERFACE_NUM}=="00", SYMLINK+="tty.991.0"
-SUBSYSTEM=="tty", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea70", ENV{ID_USB_INTERFACE_NUM}=="01", SYMLINK+="tty.991.1"
+# for CAT
+SUBSYSTEM=="tty", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea70", ENV{ID_USB_INTERFACE_NUM}=="00", SYMLINK+="tty.ft991-cat"
+
+# for serial PTT and FSK
+SUBSYSTEM=="tty", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea70", ENV{ID_USB_INTERFACE_NUM}=="01", SYMLINK+="tty.ft991-data"
 

@@ -5,7 +5,7 @@ SPEED = 38400
 # this should reflect setting no 032, not yet
 WAIT  = 1000
 # serial port for CAT, see ./contrib/rules.d99-ft991a.udev.rules
-PORT = "/dev/tty.991.0"
+PORT = "/dev/tty.ft991-cat"
 
 import click
 
